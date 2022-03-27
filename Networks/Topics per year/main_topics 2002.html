@@ -1,0 +1,125 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 850px;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "automation \u0026 control systems", "label": "automation \u0026 control systems", "shape": "dot", "size": 22}, {"font": {"color": "white"}, "id": "chemistry", "label": "chemistry", "shape": "dot", "size": 5}, {"font": {"color": "white"}, "id": "computer science", "label": "computer science", "shape": "dot", "size": 48}, {"font": {"color": "white"}, "id": "education \u0026 educational research", "label": "education \u0026 educational research", "shape": "dot", "size": 1}, {"font": {"color": "white"}, "id": "engineering", "label": "engineering", "shape": "dot", "size": 45}, {"font": {"color": "white"}, "id": "environmental sciences \u0026 ecology", "label": "environmental sciences \u0026 ecology", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "instruments \u0026 instrumentation", "label": "instruments \u0026 instrumentation", "shape": "dot", "size": 13}, {"font": {"color": "white"}, "id": "mathematics", "label": "mathematics", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "operations research \u0026 management science", "label": "operations research \u0026 management science", "shape": "dot", "size": 3}, {"font": {"color": "white"}, "id": "optics", "label": "optics", "shape": "dot", "size": 9}, {"font": {"color": "white"}, "id": "robotics", "label": "robotics", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "telecommunications", "label": "telecommunications", "shape": "dot", "size": 7}, {"font": {"color": "white"}, "id": "biochemistry \u0026 molecular biology", "label": "biochemistry \u0026 molecular biology", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "mathematical \u0026 computational biology", "label": "mathematical \u0026 computational biology", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "neurosciences \u0026 neurology", "label": "neurosciences \u0026 neurology", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "physics", "label": "physics", "shape": "dot", "size": 4}, {"font": {"color": "white"}, "id": "science \u0026 technology - other topics", "label": "science \u0026 technology - other topics", "shape": "dot", "size": 1}, {"font": {"color": "white"}, "id": "business \u0026 economics", "label": "business \u0026 economics", "shape": "dot", "size": 0}, {"font": {"color": "white"}, "id": "materials science", "label": "materials science", "shape": "dot", "size": 3}, {"font": {"color": "white"}, "id": "imaging science \u0026 photographic technology", "label": "imaging science \u0026 photographic technology", "shape": "dot", "size": 21}, {"font": {"color": "white"}, "id": "medical informatics", "label": "medical informatics", "shape": "dot", "size": 3}, {"font": {"color": "white"}, "id": "psychology", "label": "psychology", "shape": "dot", "size": 1}, {"font": {"color": "white"}, "id": "radiology, nuclear medicine \u0026 medical imaging", "label": "radiology, nuclear medicine \u0026 medical imaging", "shape": "dot", "size": 7}, {"font": {"color": "white"}, "id": "remote sensing", "label": "remote sensing", "shape": "dot", "size": 5}, {"font": {"color": "white"}, "id": "surgery", "label": "surgery", "shape": "dot", "size": 4}]);
+        edges = new vis.DataSet([{"from": "automation \u0026 control systems", "to": "chemistry", "weight": 8}, {"from": "automation \u0026 control systems", "to": "computer science", "weight": 86}, {"from": "automation \u0026 control systems", "to": "education \u0026 educational research", "weight": 11}, {"from": "automation \u0026 control systems", "to": "engineering", "weight": 145}, {"from": "automation \u0026 control systems", "to": "environmental sciences \u0026 ecology", "weight": 2}, {"from": "automation \u0026 control systems", "to": "instruments \u0026 instrumentation", "weight": 23}, {"from": "automation \u0026 control systems", "to": "mathematics", "weight": 25}, {"from": "automation \u0026 control systems", "to": "operations research \u0026 management science", "weight": 16}, {"from": "automation \u0026 control systems", "to": "optics", "weight": 5}, {"from": "automation \u0026 control systems", "to": "robotics", "weight": 121}, {"from": "automation \u0026 control systems", "to": "telecommunications", "weight": 7}, {"from": "biochemistry \u0026 molecular biology", "to": "chemistry", "weight": 17}, {"from": "biochemistry \u0026 molecular biology", "to": "computer science", "weight": 10}, {"from": "biochemistry \u0026 molecular biology", "to": "engineering", "weight": 1}, {"from": "biochemistry \u0026 molecular biology", "to": "environmental sciences \u0026 ecology", "weight": 2}, {"from": "biochemistry \u0026 molecular biology", "to": "instruments \u0026 instrumentation", "weight": 2}, {"from": "biochemistry \u0026 molecular biology", "to": "mathematical \u0026 computational biology", "weight": 9}, {"from": "biochemistry \u0026 molecular biology", "to": "mathematics", "weight": 8}, {"from": "biochemistry \u0026 molecular biology", "to": "neurosciences \u0026 neurology", "weight": 2}, {"from": "biochemistry \u0026 molecular biology", "to": "physics", "weight": 3}, {"from": "biochemistry \u0026 molecular biology", "to": "science \u0026 technology - other topics", "weight": 1}, {"from": "business \u0026 economics", "to": "computer science", "weight": 4}, {"from": "business \u0026 economics", "to": "environmental sciences \u0026 ecology", "weight": 3}, {"from": "business \u0026 economics", "to": "operations research \u0026 management science", "weight": 5}, {"from": "business \u0026 economics", "to": "telecommunications", "weight": 1}, {"from": "chemistry", "to": "computer science", "weight": 32}, {"from": "chemistry", "to": "engineering", "weight": 5}, {"from": "chemistry", "to": "environmental sciences \u0026 ecology", "weight": 8}, {"from": "chemistry", "to": "instruments \u0026 instrumentation", "weight": 13}, {"from": "chemistry", "to": "materials science", "weight": 4}, {"from": "chemistry", "to": "mathematical \u0026 computational biology", "weight": 7}, {"from": "chemistry", "to": "mathematics", "weight": 9}, {"from": "chemistry", "to": "physics", "weight": 6}, {"from": "chemistry", "to": "science \u0026 technology - other topics", "weight": 1}, {"from": "computer science", "to": "education \u0026 educational research", "weight": 13}, {"from": "computer science", "to": "engineering", "weight": 110}, {"from": "computer science", "to": "environmental sciences \u0026 ecology", "weight": 8}, {"from": "computer science", "to": "imaging science \u0026 photographic technology", "weight": 169}, {"from": "computer science", "to": "instruments \u0026 instrumentation", "weight": 51}, {"from": "computer science", "to": "materials science", "weight": 4}, {"from": "computer science", "to": "mathematical \u0026 computational biology", "weight": 21}, {"from": "computer science", "to": "mathematics", "weight": 112}, {"from": "computer science", "to": "medical informatics", "weight": 52}, {"from": "computer science", "to": "neurosciences \u0026 neurology", "weight": 27}, {"from": "computer science", "to": "operations research \u0026 management science", "weight": 21}, {"from": "computer science", "to": "optics", "weight": 32}, {"from": "computer science", "to": "physics", "weight": 2}, {"from": "computer science", "to": "psychology", "weight": 6}, {"from": "computer science", "to": "radiology, nuclear medicine \u0026 medical imaging", "weight": 44}, {"from": "computer science", "to": "remote sensing", "weight": 17}, {"from": "computer science", "to": "robotics", "weight": 34}, {"from": "computer science", "to": "science \u0026 technology - other topics", "weight": 4}, {"from": "computer science", "to": "surgery", "weight": 30}, {"from": "computer science", "to": "telecommunications", "weight": 71}, {"from": "education \u0026 educational research", "to": "engineering", "weight": 1}, {"from": "education \u0026 educational research", "to": "robotics", "weight": 11}, {"from": "engineering", "to": "environmental sciences \u0026 ecology", "weight": 16}, {"from": "engineering", "to": "imaging science \u0026 photographic technology", "weight": 148}, {"from": "engineering", "to": "instruments \u0026 instrumentation", "weight": 86}, {"from": "engineering", "to": "materials science", "weight": 32}, {"from": "engineering", "to": "mathematical \u0026 computational biology", "weight": 1}, {"from": "engineering", "to": "mathematics", "weight": 16}, {"from": "engineering", "to": "medical informatics", "weight": 17}, {"from": "engineering", "to": "neurosciences \u0026 neurology", "weight": 2}, {"from": "engineering", "to": "operations research \u0026 management science", "weight": 17}, {"from": "engineering", "to": "optics", "weight": 61}, {"from": "engineering", "to": "physics", "weight": 28}, {"from": "engineering", "to": "psychology", "weight": 6}, {"from": "engineering", "to": "radiology, nuclear medicine \u0026 medical imaging", "weight": 59}, {"from": "engineering", "to": "remote sensing", "weight": 19}, {"from": "engineering", "to": "robotics", "weight": 44}, {"from": "engineering", "to": "science \u0026 technology - other topics", "weight": 5}, {"from": "engineering", "to": "surgery", "weight": 30}, {"from": "engineering", "to": "telecommunications", "weight": 69}, {"from": "environmental sciences \u0026 ecology", "to": "imaging science \u0026 photographic technology", "weight": 4}, {"from": "environmental sciences \u0026 ecology", "to": "mathematical \u0026 computational biology", "weight": 7}, {"from": "environmental sciences \u0026 ecology", "to": "mathematics", "weight": 2}, {"from": "environmental sciences \u0026 ecology", "to": "remote sensing", "weight": 6}, {"from": "imaging science \u0026 photographic technology", "to": "instruments \u0026 instrumentation", "weight": 21}, {"from": "imaging science \u0026 photographic technology", "to": "mathematics", "weight": 1}, {"from": "imaging science \u0026 photographic technology", "to": "optics", "weight": 29}, {"from": "imaging science \u0026 photographic technology", "to": "radiology, nuclear medicine \u0026 medical imaging", "weight": 8}, {"from": "imaging science \u0026 photographic technology", "to": "remote sensing", "weight": 43}, {"from": "imaging science \u0026 photographic technology", "to": "telecommunications", "weight": 2}, {"from": "instruments \u0026 instrumentation", "to": "materials science", "weight": 3}, {"from": "instruments \u0026 instrumentation", "to": "mathematics", "weight": 8}, {"from": "instruments \u0026 instrumentation", "to": "optics", "weight": 22}, {"from": "instruments \u0026 instrumentation", "to": "physics", "weight": 18}, {"from": "instruments \u0026 instrumentation", "to": "radiology, nuclear medicine \u0026 medical imaging", "weight": 8}, {"from": "instruments \u0026 instrumentation", "to": "remote sensing", "weight": 17}, {"from": "instruments \u0026 instrumentation", "to": "science \u0026 technology - other topics", "weight": 3}, {"from": "instruments \u0026 instrumentation", "to": "telecommunications", "weight": 3}, {"from": "materials science", "to": "optics", "weight": 6}, {"from": "materials science", "to": "physics", "weight": 13}, {"from": "materials science", "to": "robotics", "weight": 3}, {"from": "materials science", "to": "science \u0026 technology - other topics", "weight": 2}, {"from": "mathematical \u0026 computational biology", "to": "mathematics", "weight": 8}, {"from": "mathematical \u0026 computational biology", "to": "medical informatics", "weight": 6}, {"from": "mathematics", "to": "operations research \u0026 management science", "weight": 5}, {"from": "mathematics", "to": "physics", "weight": 10}, {"from": "mathematics", "to": "psychology", "weight": 1}, {"from": "mathematics", "to": "science \u0026 technology - other topics", "weight": 3}, {"from": "neurosciences \u0026 neurology", "to": "psychology", "weight": 17}, {"from": "neurosciences \u0026 neurology", "to": "radiology, nuclear medicine \u0026 medical imaging", "weight": 7}, {"from": "neurosciences \u0026 neurology", "to": "surgery", "weight": 4}, {"from": "optics", "to": "physics", "weight": 10}, {"from": "optics", "to": "radiology, nuclear medicine \u0026 medical imaging", "weight": 3}, {"from": "optics", "to": "remote sensing", "weight": 8}, {"from": "optics", "to": "robotics", "weight": 5}, {"from": "optics", "to": "telecommunications", "weight": 1}, {"from": "physics", "to": "remote sensing", "weight": 1}, {"from": "physics", "to": "science \u0026 technology - other topics", "weight": 4}, {"from": "radiology, nuclear medicine \u0026 medical imaging", "to": "surgery", "weight": 30}, {"from": "remote sensing", "to": "telecommunications", "weight": 3}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -80000,
+            "springConstant": 0.006,
+            "springLength": 250
+        },
+        "enabled": true,
+        "forceAtlas2Based": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.01,
+            "damping": 0.4,
+            "gravitationalConstant": -1000,
+            "springConstant": 0.002,
+            "springLength": 100
+        },
+        "solver": "forceAtlas2Based",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
